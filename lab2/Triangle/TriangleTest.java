@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author melaniecebula
+ * @author 3freecss@gmail.com
  */
 public class TriangleTest {
   /**  We've already created a testScalene method.  Please fill in testEquilateral, and additionally
@@ -22,12 +22,35 @@ public class TriangleTest {
 
     @Test
     public void testEquilateral() {
-      //TODO: FILL IN
+      Triangle t = new Triangle(30, 30, 30);
+      String result = t.triangleType();
+      assertEquals("Equilateral", result);
+    }
+
+    @Test
+    public void testIsosceles() {
+      Triangle t = new Triangle(30, 20, 30);
+      String result = t.triangleType();
+      assertEquals("Isosceles", result);
+    }
+
+    @Test
+    public void testNegative() {
+      Triangle t = new Triangle(9, -2, 1);
+      String result = t.triangleType();
+      assertEquals("At least one length is less than 0!", result);
+    }
+
+    @Test
+    public void testInvalid() {
+      Triangle t = new Triangle(1, 2, 4);
+      String result = t.triangleType();
+      assertEquals("The lengths of the triangles do not form a valid triangle!",result);
     }
 
     //TODO: CREATE MORE TESTS
 
     public static void main(String[] args) {
-      //TODO: RUN TESTS (Look in ArithmeticTest.java main method for help!)
+      jh61b.junit.textui.runClasses(TriangleTest.class);
     }
 }
