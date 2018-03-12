@@ -61,16 +61,39 @@ public class IntList {
   /** Returns a list consisting of the elements of A followed by the
    **  elements of B.  May modify items of A. Don't use 'new'. */
 
-  public static IntList dcatenate(IntList A, IntList B) {
+  public static void dcatenate(IntList A, IntList B) {
     //TODO:  fill in method
-    return null;
+    while (A.tail != null) {
+      A = A.tail;
+    }
+    A.tail = B;
   }
 
   /** Returns a list consisting of the elements of A followed by the
    ** elements of B.  May NOT modify items of A.  Use 'new'. */
   public static IntList catenate(IntList A, IntList B) {
     //TODO:  fill in method
-    return null;
+    if (A == null) {
+      return B;
+    }
+    return new IntList(A.head, catenate(A.tail, B));
+  }
+
+
+  /** Takes in an IntList and non-destructively returns an IntList whose
+   ** elements have been reversed.*/
+  public static IntList reverseNonDestructive(IntList lst) {
+    if (lst == null) {
+      return null;
+    }
+    return catenate(reverseNonDestructive(lst.tail), IntList.list(lst.head));
+  }
+
+  /** Bonus for bosses: Write reverseDestructive, which takes in an IntList
+   ** and destructively returns the same IntList with reversed elements.
+   ** You should not use new.*/
+  public static void reverseDestructive(IntList L) {
+    return;
   }
 
 
