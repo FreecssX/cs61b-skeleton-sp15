@@ -25,6 +25,8 @@ public class IntListTest {
       assertEquals(IntList.list(1, 4, 9), L);
     }
 
+
+
     /** Do not use the new keyword in your tests. You can create
      *  lists using the handy IntList.list method.  
      * 
@@ -38,10 +40,43 @@ public class IntListTest {
      */
 
     //TODO:  Create testSquareListRecursive()
+
+    @Test
+    public void testSquareListRecursive() {
+        IntList L1 = IntList.list(1, 2, 3);
+        IntList L2 = IntList.squareListRecursive(L1);
+        assertEquals(IntList.list(1, 2, 3), L1);
+        assertEquals(IntList.list(1, 4, 9), L2);
+    }
     //TODO:  Create testDcatenate and testCatenate
+
+    @Test
+    public void testDcatenate() {
+        IntList A = IntList.list(1, 2, 3);
+        IntList B = IntList.list(4, 5, 6);
+        IntList.dcatenate(A, B);
+        assertEquals(IntList.list(1, 2, 3, 4, 5, 6), A);
+    }
+
+    @Test
+    public void testCatenate() {
+        IntList A = IntList.list(1, 2, 3);
+        IntList B = IntList.list(4, 5, 6);
+        IntList C = IntList.catenate(A, B);
+        assertEquals(IntList.list(1, 2, 3, 4, 5, 6), C);
+        assertEquals(IntList.list(1, 2, 3), A);
+    }
+
+    @Test
+    public void testReverseNonDestructive() {
+        IntList A = IntList.list(1, 2, 3);
+        IntList B = IntList.reverseNonDestructive(A);
+        assertEquals(IntList.list(3, 2, 1), B);
+    }
 
     /* Run the unit tests in this file. */
     public static void main(String... args) {
         jh61b.junit.textui.runClasses(IntListTest.class);
-    }       
+    }
+
 }   
