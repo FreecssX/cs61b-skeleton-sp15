@@ -60,7 +60,7 @@ public class Planet{
 		netForce = Math.sqrt(xF * xF + yF * yF);
 	}
 	public void draw() {
-		StdDraw.picture(x, y, "images/" + img);
+		StdDraw.picture((x + 2.5e+11) / 5e+11, (y + 2.5e+11) / 5e+11, "images/" + img);
 	}
 	public void update(double dt) {
 		xAccel = xNetForce / mass;
