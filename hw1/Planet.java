@@ -32,14 +32,14 @@ public class Planet{
 	}	
 	public double calcPairwiseForceX (Planet p) {
 		double distance = calcDistance(p);
-		double xDistance = Math.abs(x - p.x);
+		double xDistance = p.x - x;
 		double F = calcPairwiseForce(p);
 		double FX = F / distance * xDistance;
 		return FX;
 	}
 	public double calcPairwiseForceY (Planet p) {
 		double distance = calcDistance(p);
-		double yDistance = Math.abs(y - p.y);
+		double yDistance = p.y - y;
 		double F = calcPairwiseForce(p);
 		double FY = F / distance * yDistance;
 		return FY;
@@ -59,8 +59,8 @@ public class Planet{
 		yNetForce = yF;
 		netForce = Math.sqrt(xF * xF + yF * yF);
 	}
-	public void draw() {
-		StdDraw.picture((x + 2.5e+11) / 5e+11, (y + 2.5e+11) / 5e+11, "images/" + img);
+	public void draw(double radius) {
+		StdDraw.picture((x + radius) / (2 * radius), (y + radius) / (2 * radius), "images/" + img);
 	}
 	public void update(double dt) {
 		xAccel = xNetForce / mass;
