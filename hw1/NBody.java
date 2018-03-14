@@ -7,31 +7,38 @@ public class NBody {
 		int planetNum = planetFile.readInt();
 		double radius = planetFile.readDouble();
 		Planet[] planets = new Planet[planetNum];
+		
+		/* store all the planets */
 		int index = 0;
 		while (index < planetNum) {
 			planets[index] = getPlanet(planetFile);
 			index += 1;
 		}
-		StdDraw.enableDoubleBuffering();
-		StdDraw.setCanvasSize(512, 512);
-		double time = 0;
-		int anotherIndex = 0;
+		
+
+		StdDraw.setCanvasSize(512, 512); //set the size of the universe
+		
+		double time = 0; //set init time
+		
+		/* ready to show the solar system */
 		while (time < T) {
-			Planet[] planetsCopy = planets;
+			
+			/* update all the planets */
+			int anotherIndex = 0;
 			while (anotherIndex < planetNum) {
-				planets[anotherIndex].setNetForce(planetsCopy);
+				planets[anotherIndex].setNetForce(planets);
 				planets[anotherIndex].update(dt);
 				anotherIndex += 1;
 			}
-			StdDraw.clear();
+			
+			/* draw the universe and its planets */ 
 			StdDraw.picture(0.5, 0.5, "images/starfield.jpg", 1, 1);
 			index = 0;
 			while (index < planetNum) {
-				planets[index].draw();
+				planets[index].draw(radius);
 				index += 1;
 			}
-			StdDraw.show();
-            StdDraw.pause(20);
+			StdDraw.show(5);
 			time += dt;
 		}
 	}
