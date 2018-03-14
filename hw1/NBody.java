@@ -21,6 +21,8 @@ public class NBody {
 		double time = 0; //set init time
 		
 		/* ready to show the solar system */
+
+		StdAudio.loop("audio/2001.mid"); //play sound;
 		while (time < T) {
 			
 			/* update all the planets */
@@ -41,6 +43,7 @@ public class NBody {
 			StdDraw.show(5);
 			time += dt;
 		}
+		StdAudio.close(); //close the sound;
 	}
 	public static Planet getPlanet(In in) {
 		String line = in.readLine();
