@@ -29,6 +29,11 @@ public class TestDoubleChain {
         d.insertBack(8);
         assertEquals(1, d.getFront().val, 1e-11);
         assertEquals(8, d.getBack().val, 1e-11);
+        assertEquals("<[1.0, 2.0, 5.0, 7.0, 8.0]>", d.toString());
+        d.deleteByIndex(0);
+        assertEquals("<[2.0, 5.0, 7.0, 8.0]>", d.toString());
+        d.deleteByValue(7);
+        assertEquals("<[2.0, 5.0, 8.0]>", d.toString());
     }
 
     public static void main(String[] args) {
