@@ -11,9 +11,21 @@ public class Calculator {
      * @param y is an integer which is the other of the two addends
      * @return the sum of x and y
      **/
+    public EquationList e = new EquationList("la la la", 0, null); 
+    public int equationSize = 0;
     public int add(int x, int y) {
         // YOUR CODE HERE
-        return -1;
+        int sum = 0;
+        sum = x ^ y;
+        y = x & y;
+        y = y << 1;
+        while (y != 0) {
+            x = sum;
+            sum = x ^ y;
+            y = x & y;
+            y = y << 1;
+        }
+        return sum;
     }
 
     /**
@@ -26,7 +38,17 @@ public class Calculator {
      **/
     public int multiply(int x, int y) {
         // YOUR CODE HERE
-        return -1;
+        int testBit = 1;
+        int sum = 0;
+        int tempt = x;
+        while (y != 0) {
+            if ((y & testBit) == 1) {
+                sum = add(sum, tempt);
+            }
+            tempt = tempt << 1;
+            y = y >>> 1; 
+        }
+        return sum;
     }
 
     /**
@@ -40,6 +62,9 @@ public class Calculator {
      **/
     public void saveEquation(String equation, int result) {
         // YOUR CODE HERE
+        e = new EquationList(equation, result, e);
+        equationSize += 1;
+
     }
 
     /**
@@ -51,6 +76,7 @@ public class Calculator {
      **/
     public void printAllHistory() {
         // YOUR CODE HERE
+        printHistory(equationSize);
     }
 
     /**
@@ -62,6 +88,17 @@ public class Calculator {
      **/
     public void printHistory(int n) {
         // YOUR CODE HERE
+        int size = n;
+        if (n > equationSize) {
+            size = equationSize;
+        }
+        EquationList el = e;
+        while(size > 0) {
+            System.out.println(el.equation + " = " + Integer.toString(el.result));
+            el = el.next;
+            size -= 1;
+        }
+
     }    
 
     /**
@@ -70,6 +107,10 @@ public class Calculator {
     **/
     public void undoEquation() {
         // YOUR CODE HERE
+        if (equationSize > 0) {
+            e = e.next;
+            equationSize -= 1;
+        }
     }
 
     /**
@@ -78,6 +119,10 @@ public class Calculator {
      **/
     public void clearHistory() {
         // YOUR CODE HERE
+        while (equationSize > 0) {
+            e = e.next;
+            equationSize -= 1;
+        }
     }
 
     /**
@@ -88,7 +133,15 @@ public class Calculator {
      **/
     public int cumulativeSum() {
         // YOUR CODE HERE
-        return -1;
+        int sum = 0;
+        int size = equationSize;
+        EquationList el = e;
+        while (size > 0) {
+            sum += el.result;
+            size -= 1;
+            el = el.next;
+        }
+        return sum;
     }
 
     /**
@@ -99,6 +152,14 @@ public class Calculator {
      **/
     public int cumulativeProduct() {
         // YOUR CODE HERE
-        return -1;
+        int product = 1;
+        int size = equationSize;
+        EquationList el = e;
+        while (size > 0) {
+            product *= el.result;
+            size -= 1;
+            el = el.next;
+        }
+        return product;
     }
 }
