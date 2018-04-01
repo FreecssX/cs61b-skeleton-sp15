@@ -1,12 +1,12 @@
 public class Board {
-	private static Piece[][] pieces;
-	private static boolean shouldBeEmpty;
-	private static int N; // The size of the board is N X N 
-	private static int side; // who is taking the turn
-	private static int move; //num of moves during one's turn 
-	private static int piecePosX; // x position of selected piece
-	private static int piecePosY; // y position of selected piece
-	private static boolean hasCaptured; // true if has captured
+	private Piece[][] pieces;
+	private boolean shouldBeEmpty;
+	private int N; // The size of the board is N X N 
+	private int side; // who is taking the turn
+	private int move; //num of moves during one's turn 
+	private int piecePosX; // x position of selected piece
+	private int piecePosY; // y position of selected piece
+	private boolean hasCaptured; // true if has captured
 
 
 	
@@ -41,7 +41,7 @@ public class Board {
 		drawBoard();
 	}
 	
-	public static void drawBoard() {
+	public void drawBoard() {
 		for (int i = 0; i < N; i += 1) {
 			for (int j = 0; j < N; j += 1) {
 				if ((i + j) % 2 == 0) StdDrawPlus.setPenColor(StdDrawPlus.GRAY);
@@ -61,7 +61,7 @@ public class Board {
 		}
 	}
 
-	private static String getName(Piece p) {
+	private String getName(Piece p) {
 		String t;
 		if (p.isFire()) {
 			if (p.isKing()) {
@@ -87,7 +87,7 @@ public class Board {
 		return t;
 	}
 	
-	private static String findPosition(Piece p) {
+	private String findPosition(Piece p) {
 		for (int i = 0; i < N; i += 1) {
 			for (int j = 0; j < N; j += 1) {
 				if (pieces[i][j] == p) {
@@ -98,7 +98,7 @@ public class Board {
 		return "null";
 	}
 	
-	public static Piece pieceAt(int x, int y) {
+	public Piece pieceAt(int x, int y) {
 		if (x < 0 || x >= N || y < 0 || y >= N) {
 			return null;
 		} else {
@@ -106,7 +106,7 @@ public class Board {
 		}
 	}
 	
-	public static boolean canSelect(int x, int y) {
+	public boolean canSelect(int x, int y) {
 		if (x < 0 || x >= N || y < 0 || y >= N) {
 			return false;
 		} else {
@@ -186,7 +186,7 @@ public class Board {
 		}
 	}
 
-	private static boolean captured(Piece p) {
+	private boolean captured(Piece p) {
 		String posStr = findPosition(p);
 		if (p != null && posStr != "null") {
 			int posX = Integer.parseInt(posStr) / 10;
@@ -196,7 +196,7 @@ public class Board {
 		return false;
 	}
 
-	public static void select(int x, int y) {
+	public void select(int x, int y) {
 		Piece p = pieceAt(x, y);
 		if (p != null) {
 			piecePosX = x;
@@ -220,18 +220,18 @@ public class Board {
 		}
 	}
 
-	public static boolean canEndTurn() {
+	public boolean canEndTurn() {
 		return move > 0;
 	}
 
-	public static void endTurn() {
+	public void endTurn() {
 		side = 1 - side;
 		move = 0;
 		piecePosX = -1;
 		piecePosY = -1;
 	}
 
-	public static String winner() {
+	public String winner() {
 		int fireNum = getNum(0);
 		int waterNum = getNum(1);
 		if (fireNum == 0 && waterNum == 0) {
@@ -245,7 +245,7 @@ public class Board {
 		}
 	}
 
-	private static int getNum(int type) {
+	private int getNum(int type) {
 		int Num = 0;
 		for (int i = 0; i < N; i += 1) {
 			for (int j = 0; j < N; j += 1) {
@@ -259,11 +259,11 @@ public class Board {
 
 
 
-	public static void place(Piece p, int x, int y) {
+	public void place(Piece p, int x, int y) {
 		pieces[x][y] = p;
 	}
 
-	public static Piece remove(int x, int y) {
+	public Piece remove(int x, int y) {
 		Piece p = pieces[x][y];
 		pieces[x][y] = null;
 		return p;
@@ -279,17 +279,17 @@ public class Board {
 			if (StdDrawPlus.mousePressed()) {
 				xPos = (int) (StdDrawPlus.mouseX());
 				yPos = (int) (StdDrawPlus.mouseY());
-				if (canSelect(xPos, yPos)) {
-					select(xPos, yPos);
+				if (b.canSelect(xPos, yPos)) {
+					b.select(xPos, yPos);
 				}
 			}
-			drawBoard();
+			b.drawBoard();
 			StdDrawPlus.show(100);
-			if (StdDrawPlus.isSpacePressed() && canEndTurn()) {
-				endTurn();
+			if (StdDrawPlus.isSpacePressed() && b.canEndTurn()) {
+				b.endTurn();
 			}
 			if (StdDrawPlus.isKeyPressed('E')) {
-				System.out.println(winner());
+				System.out.println(b.winner());
 			}
 
 		}
