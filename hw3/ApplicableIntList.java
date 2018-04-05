@@ -12,29 +12,59 @@ public class ApplicableIntList{
 
     /** A list with head HEAD0 and tail TAIL0. */
     public ApplicableIntList(int head0, ApplicableIntList tail0) {
-        // REPLACE THIS LINE WITH YOUR SOLUTION
+        this.head = head0;
+        this.tail = tail0;
     }
 
     /** A list with null tail, and head = 0. */
     public ApplicableIntList() {
-        // REPLACE THIS LINE WITH YOUR SOLUTION
+        this.head = 0;
+        this.tail = null;
     }
 
     /** Inserts int i into its correct location, doesn't handle cycles. */
     public void insert(int i) {
-        // REPLACE THIS LINE WITH YOUR SOLUTION
+        if(i < this.head) {
+            ApplicableIntList a = new ApplicableIntList(this.head, this.tail);
+            this.head = i;
+            this.tail = a;
+        } else {
+            ApplicableIntList a = this;
+            while(a.tail != null && a.tail.head <= i) {
+                a = a.tail;
+            }
+            a.tail = new ApplicableIntList(i, a.tail);
+        }
     }
 
     /** Returns the i-th int in this list.
      *  The first element, which is in location 0, is the 0th element.
      *  Assume i takes on the values [0, length of list - 1]. */
     public int get(int i) {
-        // REPLACE THIS LINE WITH YOUR SOLUTION
+        if(i == 0) {
+            return this.head;
+        } else {
+            return this.tail.get(i - 1);
+        }
     }
 
     /** Applies the function f to every item in this list. */
     public void apply(IntUnaryFunction f) {
-        // REPLACE THIS LINE WITH YOUR SOLUTION
+         ApplicableIntList a = this;
+         while(a != null) {
+            a.head = f.apply(a.head);
+            a = a.tail;
+         }
+
+         ApplicableIntList b = new ApplicableIntList(this.get(0), null);
+         a = this;
+         ApplicableIntList c = b;
+         while(a.tail != null) {
+            a = a.tail;
+            b.insert(a.head);
+         }
+         this.head = b.head;
+         this.tail = b.tail;
     }
 
     /** Returns NULL if no cycle exists, else returns cycle location. */

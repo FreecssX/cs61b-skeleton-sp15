@@ -1,0 +1,82 @@
+public class Planet{
+	static double G = 667E-13;
+	double x;
+	double y;
+	double xVelocity;
+	double yVelocity;
+	double mass;
+	double netForce;
+	double xNetForce;
+	double yNetForce;
+	double xAccel;
+	double yAccel;
+	String img;
+	private double radius;
+	public Planet(double xPos, double yPos, double xVel, double yVel, 
+		          double planetMass, String imgName, double r) {
+		x = xPos;
+		y = yPos;
+		xVelocity = xVel;
+		yVelocity = yVel;
+		mass = planetMass;
+		img = imgName;
+		radius = r;
+	}
+
+	public double getMass() {
+		return this.mass;
+	}
+	public double getRadius() {
+		return this.radius;
+	}
+	public double calcDistance(Planet p) {
+		double xDistanceSquare = (x - p.x) * (x - p.x);
+		double yDistanceSquare = (y - p.y) * (y - p.y);
+		return Math.sqrt(xDistanceSquare + yDistanceSquare);
+	}
+	public double calcPairwiseForce(Planet p) {
+		double distance = calcDistance(p);
+		double F = G * mass* p.mass / (distance * distance);
+		return F;
+	}	
+	public double calcPairwiseForceX (Planet p) {
+		double distance = calcDistance(p);
+		double xDistance = p.x - x;
+		double F = calcPairwiseForce(p);
+		double FX = F / distance * xDistance;
+		return FX;
+	}
+	public double calcPairwiseForceY (Planet p) {
+		double distance = calcDistance(p);
+		double yDistance = p.y - y;
+		double F = calcPairwiseForce(p);
+		double FY = F / distance * yDistance;
+		return FY;
+	}
+	public void setNetForce(Planet[] ps) {
+		int i = 0;
+		double xF = 0;
+		double yF = 0;
+		while (i < ps.length) {
+			if (this != ps[i]) {
+				xF += calcPairwiseForceX(ps[i]);
+				yF += calcPairwiseForceY(ps[i]);
+			}
+			i += 1;
+		}
+		xNetForce = xF;
+		yNetForce = yF;
+		netForce = Math.sqrt(xF * xF + yF * yF);
+	}
+	public void draw(double radius) {
+		StdDraw.picture((x + radius) / (2 * radius), (y + radius) / (2 * radius), "images/" + img);
+	}
+	public void update(double dt) {
+		xAccel = xNetForce / mass;
+		yAccel = yNetForce / mass;
+		xVelocity = xVelocity + xAccel * dt;
+		yVelocity = yVelocity + yAccel * dt;
+		x = x + xVelocity * dt;
+		y = y + yVelocity * dt;
+	}
+}
