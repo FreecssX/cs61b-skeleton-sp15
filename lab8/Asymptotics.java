@@ -16,7 +16,6 @@ public class Asymptotics {
                     usage();
                     return;
                 }
-
                 Stopwatch timer = new Stopwatch();
                 switch (func) {
                 case 1: function1(arg);
@@ -76,13 +75,37 @@ public class Asymptotics {
     /** Fill in the body of this function so that its running time is
      *  n^(1/2) and so that it returns true if and only if n is prime. */
     public static boolean function4(long n) {
-	return false; //FIX ME
+        ArrayList<Integer> a = new ArrayList<Integer>();
+	    long md = (int) (Math.sqrt(n) + 0.5);
+        for(int i = 2; i <= md; i += 1) {
+            for(int j = 0; j <= 10000; j += 1) {
+            a.add(0);
+            a.clear();   
+            }
+            if(n % i == 0) return false;
+        }
+        return true;
     }
 
     /** Fill in the body of this function so that its best case running
      *  time is log(n) and its worst case running time is n. */
     public static void function5(long n) {
-        //FILL ME IN
+        ArrayList<Integer> a = new ArrayList<Integer>();
+        if(n % 2 == 0) {
+            for(int i = 1; i <= n; i += 1) {
+                for (int j = 0; j < 100000; j++) {
+                    a.add(0);
+                    a.clear();
+                }
+            }
+        } else {
+            for(int i = 1; i <= n; i *= 2) {
+                for (int j = 0; j < 10000000; j++) {
+                    a.add(0);
+                    a.clear();
+                }
+            }
+        }
     }
 
     public static void usage() {
