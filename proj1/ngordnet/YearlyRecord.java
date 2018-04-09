@@ -11,9 +11,13 @@ public class YearlyRecord {
     private Map<String, Integer> tMap;
     private Map<String, Integer> rMap;
     private boolean hasPut;
+    private ArrayList<Number> counts;
+    private boolean hasPut2;
     /** Creates a new empty YearlyRecord. */
     public YearlyRecord() {
+        counts = new ArrayList<Number>();
         hasPut = false;
+        hasPut2 = false;
         hMap = new HashMap<String, Integer>();
         rMap = new HashMap<String, Integer>();
         tMap = new TreeMap<String, Integer>(new Comparator<String>() {
@@ -48,6 +52,7 @@ public class YearlyRecord {
         hMap.put(word, count);
         tMap.put(word, count);
         hasPut = true;
+        hasPut2 = true;
      }
 
      /** Returns the number of words recorded this year. */
@@ -62,11 +67,15 @@ public class YearlyRecord {
 
      /** Returns all counts in ascending order of count. */
      public Collection<Number> counts() {
-        ArrayList<Number> c = new ArrayList<Number>();
-        for(String s: tMap.keySet()) {
-            c.add(hMap.get(s));
+        if(hasPut2) {
+            ArrayList<Number> c = new ArrayList<Number>();
+            for(String s: tMap.keySet()) {
+                c.add(hMap.get(s));
+            }
+            counts = c;
+            hasPut2 = false;
         }
-        return c;
+        return counts;
      }
 
      /** Returns rank of WORD. Most common word is rank 1. 
