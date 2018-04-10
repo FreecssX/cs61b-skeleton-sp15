@@ -34,8 +34,8 @@ public class YearlyRecordDemo {
             340
         */
 
-        Collection<Number> counts = yr.counts();
-        for (Number count : counts) {
+        Collection<Integer> counts = yr.counts();
+        for (Integer count : counts) {
             System.out.println(count);
         }
 

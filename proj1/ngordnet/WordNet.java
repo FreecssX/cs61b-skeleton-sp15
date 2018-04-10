@@ -32,6 +32,7 @@ public class WordNet {
           }
         }
       }
+      synIn.close();
       In hypIn = new In(hyponymFilename);
       hypGraph = new Digraph(wordNum + 100);
       while(hypIn.hasNextLine()) {
@@ -40,6 +41,7 @@ public class WordNet {
           hypGraph.addEdge((int)Integer.parseInt(hypSets[0]), (int)Integer.parseInt(hypSets[i]));
         }
       }
+      hypIn.close();
     } 
 
     /* Returns true if NOUN is a word in some synset. */
