@@ -183,9 +183,9 @@ class SortSounds {
 
         StdDraw.setPenColor(StdDraw.BLACK);
         if (!sort.equals("all")) {
-            StdDraw.text(WIDTH/2, HEIGHT, sort);
+            StdDraw.text(WIDTH/2, HEIGHT - 10, sort);
         } else {
-            StdDraw.text(WIDTH/2, HEIGHT, "insertion");
+            StdDraw.text(WIDTH/2, HEIGHT - 10, "insertion");
         }
         StdDraw.show(1000);
 

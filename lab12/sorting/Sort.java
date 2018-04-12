@@ -40,10 +40,15 @@ public final class Sort {
         for (int i = 0; i < N; i += 1) {
             int min = i;
             for (int j = i+1; j < N; j += 1) {
+            	SortSounds.clearRectangle(min);
                 if (less(a[j], a[min])) {
                     min = j;
                 }
+                SortSounds.drawRectangle(StdDraw.GREEN, min);
+                StdDraw.show(5);
+
             }
+            SortSounds.clearRectangle(min);
             exch(a, i, min);
         }
 
@@ -253,11 +258,22 @@ public final class Sort {
      **/
     private static void exch(int[] a, int index1, int index2) {
         /** YOUR CODE HERE! */
-
+        SortSounds.clearRectangle(index1);
+        SortSounds.clearRectangle(index2);
         int tmp = a[index1];
         a[index1] = a[index2];
         a[index2] = tmp;
+        SortSounds.drawRectangle(StdDraw.RED, index1);
+        SortSounds.play(index1);
+        SortSounds.play(index2);
+        SortSounds.drawRectangle(StdDraw.RED, index2);
+        StdDraw.show(15);
+		SortSounds.drawRectangle(StdDraw.CYAN, index1);
+		SortSounds.drawRectangle(StdDraw.CYAN, index2);
+        StdDraw.show(5);
 
+        //SortSounds.play(rightEnd);
+        
         /** YOUR CODE HERE! */
 
     }
