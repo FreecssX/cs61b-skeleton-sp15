@@ -70,7 +70,7 @@ public class Nana {
         return (int) (MY_CONST * 100);
     }
 
-    public int hashCodeF() {
+    public int hashCode() {
         return Math.abs(myNum);
     }
 
@@ -157,7 +157,7 @@ public class Nana {
     }
 
     public static final String canGetDrake() {
-        return "no"; // REPLACE THIS LINE WITH YOUR ANSWER 
+        return "yes"; // REPLACE THIS LINE WITH YOUR ANSWER 
     }
 
 } // End Nana.java
