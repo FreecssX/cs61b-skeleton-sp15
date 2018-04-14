@@ -85,7 +85,7 @@ public class Username {
         	char k = Character.toLowerCase(Username.charAt(i));
         	int num = (int) k;
         	if(num <=57) num = num - 48;
-        	else num = num - 97;
+        	else num = num - 97 + 10;
         	result = result * 36 + num;
         }
         return result;
