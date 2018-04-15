@@ -61,12 +61,19 @@ public class Piece {
 
     @Override
     public boolean equals(Object o) {
-        return false; // YOUR CODE HERE
+        if(o instanceof Piece) {
+        	return this.hashCode() == ((Piece) o).hashCode();
+        }
+        return false;
     }
 
     @Override
     public int hashCode() {
-        return 5; // YOUR CODE HERE
+        int result = 0;
+        if(isKing()) result = 1 << 8;
+        if(isBomb()) result = result + 1 << 6;
+        else if(isShield()) result = result + 1 << 7;
+        return result + 8 * y + x;
     }
 
     public static void main(String[] args) {
