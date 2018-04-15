@@ -8,22 +8,36 @@ public class MapRace {
     /* Tests the put action the specified number of times. */
     private static long timePuts61B(Map61B<Integer, Integer> map, 
                 int num_puts, int key_range, int val_range) {
-        // YOUR CODE HERE
-        return 0;
+        
+        Stopwatch sw = new Stopwatch();
+        for(int i = 0; i < num_puts; i += 1) {
+        	int key = (int) (Math.random() * (key_range + 1));
+        	int value = (int) (Math.random() * (val_range + 1));
+        	map.put(key, value);
+        }
+        return (long) (sw.elapsedTime() * 1000);
     }
 
     /* Tests the get action the specified number of times. */
     private static long timeGets61B(Map61B<Integer, Integer> map, 
                 int num_gets, int key_range) {
-        // YOUR CODE HERE
-        return 0;
+        Stopwatch sw = new Stopwatch();
+        for(int i = 0; i < num_gets; i += 1) {
+        	int key = (int) (Math.random() * (key_range + 1));
+        	map.get(key);
+        }
+        return (long) (sw.elapsedTime() * 1000);
     }
 
     /* Tests the get action the specified number of times. */
     private static long timeRemove61B(Map61B<Integer, Integer> map, 
                 int num_removes, int key_range) {
-        // YOUR CODE HERE
-        return 0;
+        Stopwatch sw = new Stopwatch();
+        for(int i = 0; i < num_removes; i += 1) {
+        	int key = (int) (Math.random() * (key_range + 1));
+        	map.remove(key);
+        }
+        return (long) (sw.elapsedTime() * 1000);
     }
 
     /* Warms up Java to get the cache hot and ready. If you don't warm up, 
